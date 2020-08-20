@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState }  from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,9 +8,41 @@ import {
 import { AppProvider } from './contexts/Context';
 import List from './pages/List';
 import Home from './pages/Home';
+import { getCurrencies } from './services/AjaxCalls';
+import LoadingComponent from './components/LoadingComponent';
 import './App.css';
 
 function App() {
+  const Loading = LoadingComponent(Home);
+  const [appState, setAppState] = useState({
+      loading: true,
+      currencies: null,
+      conversionsHistory: []
+  });
+
+  useEffect(() => {
+      setAppState({...appState, loading: true});
+      async function fetchData(){
+          const currencies = await getCurrencies();
+          setAppState({...appState, loading: false, currencies: currencies.results});
+      }
+      fetchData();
+  }, []);
+  
+  const pushConversionHistory = (amount, date, targetCurrencyName, targetCurrencyValue, initialCurrencyAmount, initialCurrencyName) =>{
+    const historyRecord = {
+        amount,
+        date,
+        targetCurrencyName,
+        targetCurrencyValue,
+        initialCurrencyAmount,
+        initialCurrencyName
+    }
+    const updatedArray = [...appState.conversionsHistory, historyRecord];
+    console.log(appState, updatedArray);
+    setAppState({...appState, conversionsHistory: updatedArray});
+  }
+  
   return (
     <>
     <Router>
@@ -28,10 +60,15 @@ function App() {
         <Switch>
           <AppProvider>
             <Route exact path="/">
-              <Home />
+              <Loading                        
+                  isLoading={appState.loading} 
+                  currencies={appState.currencies}
+                  conversionsHistory={appState.conversionsHistory}
+                  pushConversionHistory={pushConversionHistory} 
+               />
             </Route>
             <Route exact path="/list">
-              <List />
+              <List conversionsList={appState.conversionsHistory} />
             </Route>
           </AppProvider>
         </Switch>

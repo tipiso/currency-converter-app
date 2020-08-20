@@ -1,41 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { getCurrencies } from '../services/AjaxCalls';
-import LoadingComponent from '../components/LoadingComponent';
-import ConvertForm from '../components/Form';
+import React, { useState } from 'react';
+import Form from '../components/Form';
+import { getConversion } from '../services/AjaxCalls';
+import { withRouter } from 'react-router-dom';
 
-export default function FormContainer() {
-    const Loading = LoadingComponent(ConvertForm);
+function FormContainer(props) {
     const [formState, setFormState] = useState({
         loading: false,
-        currencies: null
+        convertedValue: null
     });
 
-    useEffect(() => {
-        setFormState({loading: true});
-        async function fetchData(){
-            const currencies = await getCurrencies();
-            setFormState({loading: false, currencies: currencies.results});
+    const convertValue = (amount, currencyRate) => {
+        const conversionObjectKey = Object.keys(currencyRate)[0];
+        return Number(amount * currencyRate[conversionObjectKey]).toFixed(2);
+    };
+
+    const onSubmit = async (values) => {
+        const {initialCurrencyAmount, targetCurrencyName, initialCurrencyName} = values;
+        setFormState({ loading: true });
+        const currencyRate = await getConversion(initialCurrencyName, targetCurrencyName);
+        const currencyValue = convertValue(initialCurrencyAmount, currencyRate);
+        setFormState({ loading: false, convertedValue: currencyValue });
+        props.pushConversionHistory(initialCurrencyAmount, new Date(), targetCurrencyName, currencyValue, initialCurrencyAmount, initialCurrencyName);
+        props.history.push('/list');
+    }
+
+    const validate = (values) => {
+        const errors = {}
+        if (!values.targetCurrencyName) {
+          errors.targetCurrencyName = 'Required';
         }
-        fetchData();
-    }, []);
+        if (!values.initialCurrencyName) {
+          errors.initialCurrencyName = 'Required';
+        }
+        if(typeof values.initialCurrencyAmount === 'undefined' || values.initialCurrencyAmount <= 0){
+          errors.initialCurrencyAmount = 'Required';
+        }
 
-    const onSubmit = () => {
-        console.log('submitted');
+        return errors
     }
 
-    const validate = () => {
-        console.log('validated');
-    }
-
-    console.log(formState);
     return (
         <div className="FormContainer">
-            <Loading 
-            isLoading={formState.loading} 
-            repos={formState.currencies} 
-            handleSubmit={onSubmit} 
-            handleValidate={validate}
-            />
+            <Form formState={formState} handleValidate={validate} handleSubmit={onSubmit} {...props} />
         </div>
     )
 }
+
+export default withRouter(FormContainer);

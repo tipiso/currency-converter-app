@@ -1,12 +1,11 @@
 import React from 'react'
 import FormContainer from '../containers/FormContainer';
 
-export default function Home() {
+export default function Home(props) {
 
     return (
         <div>
-            domowy
-            <FormContainer>
+            <FormContainer {...props}>
                 
             </FormContainer>
         </div>

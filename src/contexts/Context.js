@@ -1,16 +1,17 @@
 import React, { createContext } from 'react';
 
-const AppContext = createContext({
-    state: {},
-    dispatch: () => null
+const CurrencyContext = createContext({
+    currencies: [],
+    historyConversions: [],
+    addConversionToHistory: (currencyBeforeConversion, quantityBeforeConversion, targetCurrency, targetCurrencyQuantity ,date) => null
 });
 
 function AppProvider(props){
     // const [state, dispatch] = React.useReducer(formReducer, initialState);
 
     return (
-        <AppContext.Provider value={''} {...props} />
+        <CurrencyContext.Provider value={''} {...props} />
     )
 }
 
-export { AppContext, AppProvider };
+export { CurrencyContext, AppProvider };
