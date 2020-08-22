@@ -1,0 +1,25 @@
+.Navigation{
+    width: 100%;
+}
+  
+.NavigationList{
+   display: flex;
+   text-transform: uppercase;
+   justify-content: flex-end;
+   flex-wrap: wrap;
+   padding-bottom: 15px;
+}
+
+.Link{
+    font-size: 40px;
+    color: #39727E;
+}
+
+.Link:last-of-type{
+    margin-left: 35px;
+}
+
+.ActiveLink{
+    font-weight: bold;
+    text-decoration: underline;
+}

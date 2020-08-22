@@ -2,10 +2,10 @@ import React from 'react'
 import { Form, Field } from 'react-final-form';
 import Options from './Options';
 import LoadingComponent from '../components/LoadingComponent';
-import OutComponent from '../components/OutputComponent';
+import SubmitButton from '../components/SubmitButton';
 
 export default function ConvertForm(props) {
-    const Loading = LoadingComponent(OutComponent);
+    const Loading = LoadingComponent(SubmitButton);
 
     return (
         <Form
@@ -17,7 +17,7 @@ export default function ConvertForm(props) {
                     {({ input, meta }) => (
                         <div>
                             <label>Currency amount to convert</label>
-                            <input {...input} type="text" placeholder="Amount to convert..." />
+                            <input {...input} type="number" placeholder="Amount to convert..." />
                             {meta.error && meta.touched && <span>{meta.error}</span>}
                         </div>
                         )}
@@ -54,15 +54,9 @@ export default function ConvertForm(props) {
                             }
                         }
                     </Field>
-                <button 
-                    type="submit" 
-                    disabled={submitting}
-                >
-                Konwertuj
-                </button>
                 <Loading                        
+                        submitting={submitting}
                         isLoading={props.formState.loading} 
-                        convertedValue={props.formState.convertedValue} 
                 />
             </form>
         )}

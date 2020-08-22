@@ -1,0 +1,15 @@
+.HomePage{
+    display: flex;
+    width: 100%;
+}
+
+.Card{
+    width: 50%;
+    background-color: #2E565F;
+}
+
+.CardImage{
+    display: block;
+    width: 100%;
+    height: auto;
+}

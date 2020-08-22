@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import Form from '../components/Form';
 import { getConversion } from '../services/AjaxCalls';
 import { withRouter } from 'react-router-dom';
+import styles from './formContainer.module.css';
 
 function FormContainer(props) {
     const [formState, setFormState] = useState({
         loading: false,
-        convertedValue: null
     });
 
     const convertValue = (amount, currencyRate) => {
         const conversionObjectKey = Object.keys(currencyRate)[0];
-        return Number(amount * currencyRate[conversionObjectKey]).toFixed(2);
+        return props.currencyFormat(Number(amount * currencyRate[conversionObjectKey]));
     };
 
     const onSubmit = async (values) => {
@@ -19,8 +19,8 @@ function FormContainer(props) {
         setFormState({ loading: true });
         const currencyRate = await getConversion(initialCurrencyName, targetCurrencyName);
         const currencyValue = convertValue(initialCurrencyAmount, currencyRate);
-        setFormState({ loading: false, convertedValue: currencyValue });
-        props.pushConversionHistory(initialCurrencyAmount, new Date(), targetCurrencyName, currencyValue, initialCurrencyAmount, initialCurrencyName);
+        setFormState({ loading: false });
+        props.pushConversionHistory(new Date(), targetCurrencyName, currencyValue, initialCurrencyAmount, initialCurrencyName);
         props.history.push('/list');
     }
 
