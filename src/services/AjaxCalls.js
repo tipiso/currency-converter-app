@@ -7,8 +7,10 @@ export async function getCurrencies() {
         if(response.ok){
             const currencies = await response.json();
             return currencies;
+        }else if(response.status === 400){
+            console.log('Missing API_KEY');
         }else{
-            console.log('Response not ok:' +  response.statusText);
+            console.log('Response not ok, error:' + response.status)
         }
     }catch(error){
         alert(error);
