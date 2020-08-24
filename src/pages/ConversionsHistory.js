@@ -1,9 +1,12 @@
 import React from 'react'
 import ConversionHistoryTable from '../containers/ConversionHistoryTable';
+import styles from './conversionHistory.module.css';
 
 export default function ConversionsHistory(props) {
 
     return (
-        <ConversionHistoryTable {...props} />
+        <div className={styles.ConversionHistoryPage}>
+            <ConversionHistoryTable {...props} />
+        </div>
     )
 }

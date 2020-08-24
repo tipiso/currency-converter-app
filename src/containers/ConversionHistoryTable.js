@@ -1,37 +1,44 @@
 import React from 'react'
 import TableRow from '../components/TableRow';
+import Header from '../components/Header';
+import Button from '../components/Button';
+import styles from './conversionHistoryTable.module.css';
 
 export default function ConversionHistoryTable(props) {
 
     return (
         <>
+        <Header />
         { 
             (Array.isArray(props.conversionsList) && props.conversionsList.length > 0)   ?
             <>
-                <table>
+                <table className={styles.Table}>
                     <thead>
                         <tr>
-                            <th colSpan="6">Conversions History</th>
-                        </tr>
-                        <tr>
-                            <th>#</th>
-                            <th>Initial currency</th>
-                            <th>Amount of initial currency</th>
-                            <th>Target currency</th>
-                            <th>Amount of target currency</th>
-                            <th>Date of conversion</th>
+                            <th className={`${styles.TableHead} ${styles.DarkBg}`}>#</th>
+                            <th className={`${styles.TableHead}`}>Initial currency</th>
+                            <th className={`${styles.TableHead} ${styles.DarkBg}`}>Amount of initial currency</th>
+                            <th className={`${styles.TableHead}`}>Target currency</th>
+                            <th className={`${styles.TableHead} ${styles.DarkBg}`}>Amount of target currency</th>
+                            <th className={`${styles.TableHead}`}>Date of conversion</th>
                         </tr>
                     </thead>
                     <tbody>
                         {props.conversionsList.map((item, index) => (
-                            <TableRow key={index} index={index} item={item}></TableRow>
+                            <TableRow  
+                            key={index} 
+                            index={index} 
+                            item={item}></TableRow>
                         ))}
                     </tbody>
                 </table>
-                <button onClick={props.clearConversionHistory}>Clear History</button>
+                <Button 
+                danger={true}
+                handleClick={props.clearConversionHistory} 
+                description={'Clear History'} />
             </>
             :
-            <h2>You haven't done any conversions yet.</h2>
+            <h2 className={styles.DefaultText}>You haven't done any conversions yet.</h2>
         }
         </>
     )

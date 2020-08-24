@@ -1,0 +1,10 @@
+.Input{
+    width: 100%;
+    font-size: 25px;
+    color: #2E565F;
+    padding: 15px 0 15px 20px;
+}
+
+.Error{
+    border: 1px solid red;
+}

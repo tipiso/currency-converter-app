@@ -1,5 +1,4 @@
 export function pushHistoryToLocalStorage(conversionsArray) {
-    console.log(conversionsArray, JSON.stringify(conversionsArray))
     localStorage.setItem(`conversionsHistory`, JSON.stringify(conversionsArray));
 }
 

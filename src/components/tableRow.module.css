@@ -1,0 +1,27 @@
+.TableRow{
+
+}
+
+.Td{
+    height: 100px;
+    font-size: 25px;
+    color: #39727E;
+    text-align: center;
+    background-color: #fff;
+    border: none;
+}
+
+.IndexTd{
+    color: #DEDEDE;
+    width: 50px;
+    background-color: #2F96AD;
+}
+
+.DarkGrayBg{
+    background-color: #CBCACA;
+    color: #39727E;
+}
+
+.DarkBg{
+    background-color: #39727E;
+}

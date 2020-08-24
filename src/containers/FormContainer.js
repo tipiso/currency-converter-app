@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import Form from '../components/Form';
+import ConvertForm from '../components/ConvertForm';
 import { getConversion } from '../services/AjaxCalls';
 import { withRouter } from 'react-router-dom';
-import styles from './formContainer.module.css';
 
 function FormContainer(props) {
     const [formState, setFormState] = useState({
@@ -41,7 +40,7 @@ function FormContainer(props) {
 
     return (
         <div className="FormContainer">
-            <Form formState={formState} handleValidate={validate} handleSubmit={onSubmit} {...props} />
+            <ConvertForm formState={formState} handleValidate={validate} handleSubmit={onSubmit} {...props} />
         </div>
     )
 }

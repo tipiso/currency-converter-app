@@ -1,15 +1,18 @@
 import React from 'react';
+import styles from './tableRow.module.css';
 
 export default function TableRow(props) {
     const { index, item } = props;
+    const indexEven = index % 2 === 0 ? true : false;
+
     return (
-        <tr>
-            <td>{index + 1}</td>
-            <td>{item.initialCurrencyName}</td>
-            <td>{item.initialCurrencyAmount}</td>
-            <td>{item.targetCurrencyName}</td>
-            <td>{item.targetCurrencyValue}</td>
-            <td>{item.conversionDate}</td>
+        <tr className={styles.TableRow}>
+            <td className={!indexEven ? `${styles.Td} ${styles.IndexTd} ${styles.DarkBg}` : `${styles.Td} ${styles.IndexTd}`}>{index + 1}.</td>
+            <td className={`${styles.Td}`}>{item.initialCurrencyName}</td>
+            <td className={`${styles.Td} ${styles.DarkGrayBg}`}>{item.initialCurrencyAmount}</td>
+            <td className={styles.Td}>{item.targetCurrencyName}</td>
+            <td className={`${styles.Td} ${styles.DarkGrayBg}`}>{item.targetCurrencyValue}</td>
+            <td className={styles.Td}>{item.conversionDate}</td>
         </tr>
     )
 }

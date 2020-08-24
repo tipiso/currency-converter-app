@@ -1,0 +1,53 @@
+.Input {
+    width: 100%;
+    font-size: 25px;
+    color: #2E565F;
+    padding: 15px 0 15px 20px;
+    background: #f8f8f8;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select {padding-right:18px}
+}
+
+.ArrowReplacement {position:relative}
+.ArrowReplacement::after {
+    content: '^';
+    font: 36px "Roboto", monospace;
+    color: #fff;
+    transform: rotate(180deg);
+    width: 16px;
+    height: 22px;
+    right: 16px;
+    top: 20px;
+    padding: 0 0 2px;
+    position: absolute;
+    pointer-events: none;
+}
+
+.ArrowReplacement::before {
+    content:'';
+    right:0px; 
+    top:0px;
+    width:50px; 
+    height:100%;
+    background:#2F96AD;
+    position:absolute;
+    pointer-events:none;
+    display:block;
+}
+
+.Error{
+    border: 1px solid red;
+}
+
+.ArrowReplacement.SelectOpen::after{
+    transform: rotate(360deg);
+}
