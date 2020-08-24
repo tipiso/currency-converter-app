@@ -9,6 +9,14 @@ Basic app deploy is desribed below.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Env variable crucial for testing
+
+- https://free.currencyconverterapi.com/free-api-key - here you will receive an API key for application,
+- Rename file .env.example to .env,
+- Paste received API key under the only variable found in .env file.
+
+Next, you can continue with typical directions for running CRA applications mentioned below. 
+
 ## Available Scripts
 
 In the project directory, you can run:
