@@ -1,3 +1,12 @@
+Project is straightforward, user has to pick target and original currency, application sends request to https://free.currencyconverterapi.com/ and receives exchange rate between picked currencies. Final value in target currency is calculated and persisted in LocalStorage, along with the rest of operation variables. Application displays historic data in tabular data and allows clearing it. 
+
+Libraries used:
+- react-final-form,
+- react-router,
+- react-spinners,
+
+Basic app deploy is desribed below.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
