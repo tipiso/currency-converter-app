@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+
 import FormContainer from '../containers/FormContainer';
 import Header from '../components/Header';
 import styles from './home.module.css';

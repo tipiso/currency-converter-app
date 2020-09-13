@@ -8,7 +8,7 @@ import ConversionsHistory from './pages/ConversionsHistory';
 import Home from './pages/Home';
 import Navigation from './containers/Navigation';
 import { getCurrencies } from './services/AjaxCalls';
-import { getHistoryFromLocalStorage, pushHistoryToLocalStorage, removeHistoryFromLocalStorage } from './services/LocalStorageHandlers';
+import { getHistoryFromLocalStorage, pushHistoryToLocalStorage, removeHistoryFromLocalStorage, storageAvailable } from './services/LocalStorageHandlers';
 import LoadingComponent from './components/LoadingComponent';
 import styles from './App.module.css';
 
@@ -18,14 +18,15 @@ function App() {
   const [appState, setAppState] = useState({
       loading: true,
       currencies: null,
-      conversionsHistory: getHistoryFromLocalStorage()
+      conversionsHistory: getHistoryFromLocalStorage(),
+      localStorageAvailable: storageAvailable('localStorage')
   });
 
   useEffect(() => {
-      setAppState({...appState, loading: true});
+      setAppState(prevState => ({ ...prevState, loading: true }));
       async function fetchData(){
           const currencies = await getCurrencies();
-          setAppState({...appState, loading: false, currencies: currencies.results});
+          setAppState(prevState => ({...prevState, loading: false, currencies: currencies.results}));
       }
       fetchData();
   }, []);
@@ -35,7 +36,9 @@ function App() {
   }
 
   const clearConversionHistory = () => {
-    removeHistoryFromLocalStorage();
+    if(appState.localStorageAvailable){
+      removeHistoryFromLocalStorage();
+    }
     setAppState({...appState, conversionsHistory: []});
   }
 
@@ -48,7 +51,9 @@ function App() {
         initialCurrencyName
     }
     const updatedArray = [...appState.conversionsHistory, historyRecord];
-    pushHistoryToLocalStorage(updatedArray);
+    if(appState.localStorageAvailable){
+      pushHistoryToLocalStorage(updatedArray);
+    }
     setAppState({...appState, conversionsHistory: updatedArray});
   }
   
