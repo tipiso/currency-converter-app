@@ -6,11 +6,11 @@ export async function getCurrencies() {
         const response = await fetch(API_URL);
         if(response.ok){
             const currencies = await response.json();
-            return currencies;
+            return {response: true, currencies};
         }else if(response.status === 400){
-            console.log('Missing API_KEY');
+            return {response: false, errorMsg: 'Missing API_KEY' };
         }else{
-            console.log('Response not ok, error:' + response.status)
+            return {response: false, errorMsg: `Response not ok, error: ${response.status}`}
         }
     }catch(error){
         alert(error);
@@ -22,10 +22,10 @@ export async function getConversion(initialCurrency, targetCurrency){
     try{
         const response = await fetch(API_GET_CONVERSION);
         if(response.ok){
-            const conversionResult = await response.json();
-            return conversionResult;
+            const currencyRate = await response.json();
+            return {response: true, currencyRate};
         }else{
-            console.log('Response not ok:' + response.statusText);
+            return {response: false, errorMsg: `Response not ok: ${response.statusText}`};
         }
     }catch(error){
         alert(error);

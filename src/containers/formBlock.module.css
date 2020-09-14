@@ -1,0 +1,26 @@
+.FormError{
+    color: red;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.InputWrap{
+    width: 100%;
+}
+
+.InputWrap.Error select,
+.InputWrap.Error input {
+    border: solid 1px red;
+}
+
+.InputWrap:not(:last-of-type){
+    padding-bottom: 15px;
+}
+
+.Label{
+    display: inline-block;
+    color: #D0DCDF;
+    font-size: 25px;
+    font-weight: 500;
+    padding-bottom: 15px;
+}

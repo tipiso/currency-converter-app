@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+
 import TableRow from '../components/TableRow';
 import Header from '../components/Header';
 import Button from '../components/Button';

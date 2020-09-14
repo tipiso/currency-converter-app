@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import SelectInput from '../components/SelectInput';
 import TextInput from '../components/TextInput';
-import styles from '../components/convertForm.module.css';
+import styles from './formBlock.module.css';
 
 export default function FormBlock(props) {
     const { meta, input, placeholder, label, options } = props;

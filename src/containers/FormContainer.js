@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+
+import Modal from '../components/Modal';
 import ConvertForm from '../components/ConvertForm';
 import { getConversion } from '../services/AjaxCalls';
 import { withRouter } from 'react-router-dom';
 
 function FormContainer(props) {
+    const [modalOpen, setModalOpen] = useState({isOpen: false, msg: ''});
     const [formState, setFormState] = useState({
         loading: false,
     });
@@ -16,11 +19,15 @@ function FormContainer(props) {
     const onSubmit = async (values) => {
         const {initialCurrencyAmount, targetCurrencyName, initialCurrencyName} = values;
         setFormState({ loading: true });
-        const currencyRate = await getConversion(initialCurrencyName, targetCurrencyName);
-        const currencyValue = convertValue(initialCurrencyAmount, currencyRate);
-        setFormState({ loading: false });
-        props.pushConversionHistory(new Date(), targetCurrencyName, currencyValue, initialCurrencyAmount, initialCurrencyName);
-        props.history.push('/list');
+        const data = await getConversion(initialCurrencyName, targetCurrencyName);
+        if(data.response){
+            const currencyValue = convertValue(initialCurrencyAmount, data.currencyRate);
+            setFormState({ loading: false });
+            props.pushConversionHistory(new Date(), targetCurrencyName, currencyValue, initialCurrencyAmount, initialCurrencyName);
+            props.history.push('/list');
+        }else{
+            setModalOpen({isOpen: true, msg: data.errorMsg});
+        }
     }
 
     const validate = (values) => {
@@ -40,6 +47,9 @@ function FormContainer(props) {
 
     return (
         <div className="FormContainer">
+            <Modal isOpen={modalOpen.isOpen}>
+                <span>{modalOpen.msg}</span>
+            </Modal>
             <ConvertForm formState={formState} handleValidate={validate} handleSubmit={onSubmit} {...props} />
         </div>
     )

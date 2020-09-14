@@ -8,7 +8,6 @@ export function storageAvailable(type) {
         return true;
     }
     catch(e) {
-        console.log(e);
         return e instanceof DOMException && (
             e.code === 22 ||
             e.code === 1014 ||

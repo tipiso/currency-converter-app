@@ -4,6 +4,8 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+
+import Modal from './components/Modal'; 
 import ConversionsHistory from './pages/ConversionsHistory';
 import Home from './pages/Home';
 import Navigation from './containers/Navigation';
@@ -15,6 +17,7 @@ import styles from './App.module.css';
 
 function App() {
   const Loading = LoadingComponent(Home);
+  const [modalOpen, setModalOpen] = useState({isOpen: false, msg: ''});
   const [appState, setAppState] = useState({
       loading: true,
       currencies: null,
@@ -25,8 +28,12 @@ function App() {
   useEffect(() => {
       setAppState(prevState => ({ ...prevState, loading: true }));
       async function fetchData(){
-          const currencies = await getCurrencies();
-          setAppState(prevState => ({...prevState, loading: false, currencies: currencies.results}));
+          const data = await getCurrencies();
+          if(data.response){
+            setAppState(prevState => ({...prevState, loading: false, currencies: data.currencies.results}));
+          }else{
+            setModalOpen({isOpen: true, msg: data.errorMsg});
+          }
       }
       fetchData();
   }, []);
@@ -59,6 +66,9 @@ function App() {
   
   return (
     <div className={styles.AppWrapper}>
+      <Modal isOpen={modalOpen.isOpen}>
+        <span>{modalOpen.msg}</span>
+      </Modal>
       <div className={styles.App}>
       <Router>
         <Navigation />
