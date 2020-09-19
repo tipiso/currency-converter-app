@@ -5,6 +5,6 @@ export default function TextInput(props) {
     const {input, type, placeholder} = props;
 
     return (
-        <input className={styles.Input} {...input} type={type} placeholder={placeholder} />
+        <input className={styles.Input} {...props} {...input} type={type} placeholder={placeholder} />
     )
 }

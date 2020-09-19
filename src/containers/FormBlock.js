@@ -6,16 +6,17 @@ import TextInput from '../components/TextInput';
 import styles from './formBlock.module.css';
 
 export default function FormBlock(props) {
-    const { meta, input, placeholder, label, options } = props;
+    const { meta, input, placeholder, label, options, type } = props;
     const errorClassnames = classNames(styles.FormError);
     const inputClassnames = classNames([styles.InputWrap,  meta.error && meta.touched && styles.Error]);
     let inputComponent = null;
-
+    console.log(props);
     switch(props.type){
         case 'text': 
             inputComponent = (
                 <TextInput 
-                    type={"number"}
+                    {...props}
+                    type={type}
                     placeholder={placeholder}
                     input={input}
                 /> 
@@ -24,6 +25,7 @@ export default function FormBlock(props) {
         case 'select':
             inputComponent = (
                 <SelectInput 
+                    {...props}
                     name={input.name}
                     options={options}
                     onChange={(value) => input.onChange(value)}
@@ -35,7 +37,7 @@ export default function FormBlock(props) {
 
     return (
         <div className={inputClassnames}>
-            <label className={styles.Label}>{label}</label>
+            {/* <label className={styles.Label}>{label}</label> */}
                 {inputComponent}
             {meta.error && meta.touched && <span className={errorClassnames}>{meta.error}</span>}
         </div>

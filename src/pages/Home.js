@@ -14,9 +14,9 @@ export default function Home(props) {
                 <FormContainer {...props}> 
                 </FormContainer>
             </div>
-            <div className={styles.Card}>
+            {/* <div className={styles.Card}>
                 <img className={styles.CardImage} src={HomePageBackground} alt="app img" />
-            </div>
+            </div> */}
         </div>
     )
 }

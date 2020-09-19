@@ -10,11 +10,11 @@
 
 .InputWrap.Error select,
 .InputWrap.Error input {
-    border: solid 1px red;
+    border-bottom: solid 2px red;
 }
 
-.InputWrap:not(:last-of-type){
-    padding-bottom: 15px;
+.InputWrap{
+    padding-bottom: 25px;
 }
 
 .Label{

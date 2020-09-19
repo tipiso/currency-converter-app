@@ -2,3 +2,22 @@
     padding-top: 30px;
 }
 
+.FormSelectBlock{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 25px;
+}
+
+.FormSelectBlock > *{
+    padding: 0;
+}
+
+.BlockIcon{
+    padding: 0 40px;
+}
+
+.Icon{
+    width: 18px;
+    height: 14px;
+}
