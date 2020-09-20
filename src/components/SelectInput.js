@@ -17,10 +17,27 @@ export default function SelectInput(props) {
             })
         );
     }
-    
+
+    const handleChange = (e) => {
+        const inputName = e.target.name;
+        const inputValue = e.target.value;
+        props.onChange(inputValue);
+        if(inputValue){
+            switch(inputName){
+                case 'initialCurrencyName':
+                    props.setInitialCurr(inputValue);
+                    break;
+                case 'targetCurrencyName':
+                    props.setTargetCurr(inputValue);
+                    break;
+                default: break;
+            }
+        }
+    }
+
     return (
         <div onBlur={() => setActive(false)} onClick={() => setActive(!active)} className={blockClassnames}>
-            <select className={styles.Input} name={props.name} onChange={props.onChange}>
+            <select className={styles.Input} name={props.name} onChange={handleChange}>
                 {options}
             </select>
         </div>

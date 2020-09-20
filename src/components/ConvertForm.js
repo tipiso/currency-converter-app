@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Field } from 'react-final-form';
 
 import FormBlock from '../containers/FormBlock';
@@ -9,6 +9,8 @@ import styles from './convertForm.module.css';
 
 export default function ConvertForm(props) {
     const Loading = LoadingComponent(Button);
+    const [initialCurr, setInitialCurr] = useState('');
+    const [targetCurr, setTargetCurr] = useState('');
 
     return (
         <Form
@@ -23,6 +25,8 @@ export default function ConvertForm(props) {
                         meta={meta} 
                         label='Type of currency to convert' 
                         placeholder='Wpisz kwotę' 
+                        initialcurr={initialCurr}
+                        targetcurr={targetCurr}
                     />}
                     </Field>
                     <Field name="conversionResult">
@@ -32,6 +36,8 @@ export default function ConvertForm(props) {
                         readOnly
                         label='Type of currency to convert' 
                         placeholder='Wynik' 
+                        initialcurr={initialCurr}
+                        targetcurr={targetCurr}
                     />}
                     </Field>
                     <div className={styles.FormSelectBlock}>
@@ -42,6 +48,9 @@ export default function ConvertForm(props) {
                             meta={meta} 
                             options={options} 
                             label='Type of currency to convert' 
+                            initialcurr={initialCurr}
+                            targetcurr={targetCurr}
+                            setInitialCurr={setInitialCurr}
                             />}
                         </Field>
                         <div className={styles.BlockIcon}>
@@ -54,6 +63,9 @@ export default function ConvertForm(props) {
                             meta={meta} 
                             options={options} 
                             label='Type of target currency' 
+                            initialcurr={initialCurr}
+                            targetcurr={targetCurr}
+                            setTargetCurr={setTargetCurr}
                             />}
                         </Field>
                     </div>

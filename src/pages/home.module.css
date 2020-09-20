@@ -1,7 +1,9 @@
 .HomePage{
     display: flex;
+    position: relative;
     width: 100%;
     min-height: 740px;
+    z-index: 1;
 }
 
 .Card{
@@ -9,13 +11,29 @@
     border-radius: 20px;
 }
 
+.CardHidden{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    padding-top: 50px;
+    left: -30px;
+    background: transparent linear-gradient(180deg, #3578EB 0%, #1C5CC5 100%);
+    border-radius: 20px;
+    z-index: -1;
+    min-width: 100px;
+}
+
 .ContentPadding{
     padding: 100px;
 }
 
-.CardImage{
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.CardHeader{
+    display: inline-block;
+    color: #fff;
+    transform: rotate(90deg);
+    margin-left: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    opacity: .6;
 }

@@ -84,6 +84,13 @@ function App() {
                 />
               </Route>
               <Route exact path="/list">
+                <Loading                        
+                    isLoading={appState.loading} 
+                    currencies={appState.currencies}
+                    conversionsHistory={appState.conversionsHistory}
+                    pushConversionHistory={pushConversionHistory} 
+                    currencyFormat={currencyFormat}
+                />
                 <ConversionsHistory 
                   conversionsList={appState.conversionsHistory} 
                   clearConversionHistory={clearConversionHistory}
